@@ -1,0 +1,47 @@
+{
+  "name": "echarts-for-taro3",
+  "version": "1.0.0",
+  "private": true,
+  "description": "demo",
+  "templateInfo": {
+    "name": "vuex",
+    "typescript": false,
+    "css": "less"
+  },
+  "scripts": {
+    "build:h5": "taro build --type h5",
+    "dev:h5": "npm run build:h5 -- --watch ",
+    "build:weapp": "taro build --type weapp",
+    "dev:weapp": "npm run build:weapp -- --watch "
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.7.7",
+    "@tarojs/components": "3.3.19",
+    "@tarojs/runtime": "3.3.19",
+    "@tarojs/taro": "3.3.19",
+    "vant": "^2.12.37",
+    "vue": "^2.5.0",
+    "vue-template-compiler": "^2.5.0",
+    "vuex": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@tarojs/mini-runner": "3.3.19",
+    "@tarojs/plugin-inject": "^1.0.1",
+    "@tarojs/webpack-runner": "3.3.19",
+    "@types/webpack-env": "^1.13.6",
+    "babel-preset-taro": "3.3.19",
+    "eslint": "^6.8.0",
+    "eslint-config-taro": "3.3.19",
+    "eslint-plugin-vue": "^6.x",
+    "stylelint": "9.3.0",
+    "vue-loader": "^15.9.2"
+  }
+}
