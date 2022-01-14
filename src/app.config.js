@@ -1,6 +1,7 @@
 export default {
   pages: [
     "pages/index/index",
+    "pages/bar/index",
     "pages/ecchart/index",
     "pages/ecchart/line-basic",
     "pages/ecchart/line-smooth",

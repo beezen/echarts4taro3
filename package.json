@@ -26,6 +26,7 @@
     "@tarojs/components": "3.3.19",
     "@tarojs/runtime": "3.3.19",
     "@tarojs/taro": "3.3.19",
+    "echarts4taro3": "latest",
     "vant": "^2.12.37",
     "vue": "^2.5.0",
     "vue-template-compiler": "^2.5.0",
