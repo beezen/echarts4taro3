@@ -1,0 +1,16 @@
+{
+  "name": "echarts4taro3",
+  "version": "0.0.2",
+  "description": "基于Taro3的Echarts跨端组件,一套代码可同时运行于h5和小程序端。",
+  "main": "./index.js",
+  "keywords": [
+    "echarts4taro3",
+    "echarts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beezen/echarts4taro3"
+  },
+  "author": "beezen",
+  "license": "ISC"
+}

@@ -29,20 +29,21 @@ export default {
   data() {
     let uid = `ec-canvas-${Math.floor(Math.random() * 1000000)}`;
     return {
-      uid
+      uid,
     };
   },
   props: {
     canvasId: {
       type: String,
-      default: ""
+      default: "",
     },
     ec: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   mounted() {
+    if (process.env.TARO_ENV === "h5") return;
     echarts.registerPreprocessor((option) => {
       if (option && option.series) {
         if (option.series.length > 0) {
@@ -82,7 +83,7 @@ export default {
         .select(`.${this.uid}`)
         .fields({
           node: true,
-          size: true
+          size: true,
         })
         .exec((res) => {
           const canvasNode = res[0].node;
@@ -98,7 +99,12 @@ export default {
           if (typeof callback === "function") {
             this.chart = callback(canvas, canvasWidth, canvasHeight, canvasDpr);
           } else if (typeof ec.onInit === "function") {
-            this.chart = ec.onInit(canvas, canvasWidth, canvasHeight, canvasDpr);
+            this.chart = ec.onInit(
+              canvas,
+              canvasWidth,
+              canvasHeight,
+              canvasDpr
+            );
           }
         });
     },
@@ -108,7 +114,7 @@ export default {
         .select(`.${this.uid}`)
         .fields({
           node: true,
-          size: true
+          size: true,
         })
         .exec((res) => {
           const canvasNode = res[0].node;
@@ -122,11 +128,11 @@ export default {
         var handler = this.chart.getZr().handler;
         handler.dispatch("mousedown", {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
         handler.dispatch("mousemove", {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
         handler.processGesture(wrapTouch(e), "start");
       }
@@ -137,7 +143,7 @@ export default {
         var handler = this.chart.getZr().handler;
         handler.dispatch("mousemove", {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
         handler.processGesture(wrapTouch(e), "change");
       }
@@ -148,16 +154,16 @@ export default {
         var handler = this.chart.getZr().handler;
         handler.dispatch("mouseup", {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
         handler.dispatch("click", {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
         handler.processGesture(wrapTouch(e), "end");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
