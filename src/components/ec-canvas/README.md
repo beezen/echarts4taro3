@@ -35,7 +35,17 @@ git clone https://github.com/beezen/echarts4taro3.git
 
 ## 快速开始
 
-可以拷贝项目中 ec-canvas 跨端组件到业务项目中直接使用
+方式一：依赖安装
+
+```bash
+yarn add echarts4taro3 -S
+```
+
+```javascript
+import { EChart } from "echarts4taro3";
+```
+
+方式二：可以拷贝项目中 ec-canvas 跨端组件到业务项目中直接使用
 
 ```bash
 ## src 目录下
@@ -60,7 +70,8 @@ git clone https://github.com/beezen/echarts4taro3.git
 
 <script>
 import Taro from "@tarojs/taro";
-import { EChart } from "@/components/ec-canvas";
+import { EChart } from "echarts4taro3";
+// import { EChart } from "@/components/ec-canvas";
 import "./index.less";
 
 export default {
