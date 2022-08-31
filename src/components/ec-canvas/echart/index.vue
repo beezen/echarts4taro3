@@ -5,6 +5,7 @@
     :ref="uid"
     :canvas-id="canvasId"
     :ec="ec"
+    :uid="uid"
     class="echart-canvas"
   />
 </template>
@@ -23,7 +24,7 @@ export default {
     },
   },
   data() {
-    let uid = `canvas-${Math.floor(Math.random() * 1000000)}`; // 唯一标记
+    let uid = `canvas-${Date.now()}-${Math.floor(Math.random() * 10000)}`; // 唯一标记
     return {
       uid,
       isWeb: process.env.TARO_ENV === "h5",
@@ -42,6 +43,13 @@ export default {
     setOption(data) {
       this.chartInstance.setOption(data);
     },
+    /** 改变图表尺寸 */
+    resize(options) {
+      this.chartInstance.resize({
+        width: options.width,
+        height: options.height,
+      });
+    },
     /**
      * 刷新图表
      * 注：节点挂载后才能执行
@@ -57,15 +65,43 @@ export default {
         }, 100);
       } else {
         // 小程序模式
-        this.$refs[this.uid]?.init((canvas, width, height, canvasDpr) => {
+        this.$refs[this.uid].init((canvas, width, height, canvasDpr) => {
           const chart = echarts.init(canvas, null, {
             width: width,
             height: height,
             devicePixelRatio: canvasDpr,
           });
           canvas.setChart(chart);
-          chart.setOption(data);
           this.chartInstance = chart;
+          // 优化图表尺寸未获取到情况
+          if (!width || !height) {
+            let count = 0;
+            const doFn = () => {
+              count++;
+              wx.createSelectorQuery()
+                .select(`.${this.uid}`)
+                .fields({
+                  node: true,
+                  size: true,
+                })
+                .exec((res) => {
+                  const canvasWidth = res[0].width;
+                  const canvasHeight = res[0].height;
+                  if ((!canvasWidth || !canvasHeight) && count < 20) {
+                    setTimeout(doFn, 100);
+                  } else {
+                    chart.resize({
+                      width: canvasWidth,
+                      height: canvasHeight,
+                    });
+                    chart.setOption(data);
+                  }
+                });
+            };
+            doFn();
+            return chart;
+          }
+          chart.setOption(data);
           return chart;
         });
       }
