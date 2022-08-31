@@ -26,12 +26,7 @@ function wrapTouch(event) {
 
 export default {
   name: "EcCanvas",
-  data() {
-    let uid = `ec-canvas-${Math.floor(Math.random() * 1000000)}`;
-    return {
-      uid,
-    };
-  },
+  data() {},
   props: {
     canvasId: {
       type: String,
@@ -40,6 +35,10 @@ export default {
     ec: {
       type: Object,
       default: null,
+    },
+    uid: {
+      type: String,
+      default: "",
     },
   },
   mounted() {
