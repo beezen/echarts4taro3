@@ -1,5 +1,7 @@
 # 前端项目
 *.zip
+.yalc
+yalc.lock
 
 ## 生成文件
 /_*

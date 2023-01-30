@@ -7,7 +7,7 @@
 <script>
 import Taro from "@tarojs/taro";
 import "./index.less";
-import { EChart } from "@/components/ec-canvas";
+import { EChart } from "echarts4taro3";
 
 export default {
   name: "Index",

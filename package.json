@@ -29,13 +29,13 @@
     "@tarojs/runtime": "3.4.2",
     "@tarojs/taro": "3.4.2",
     "echarts4taro3": "latest",
-    "vant": "^2.12.37",
     "vue": "^2.5.0",
     "vue-template-compiler": "^2.5.0",
     "vuex": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
+    "@tarojs/cli": "3.4.2",
     "@tarojs/mini-runner": "3.4.2",
     "@tarojs/plugin-inject": "^1.0.1",
     "@tarojs/webpack-runner": "3.4.2",
