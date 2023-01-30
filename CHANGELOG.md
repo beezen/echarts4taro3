@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/beezen/echarts4taro3/compare/v1.1.2...v1.2.0) (2023-01-30)
+
+
+### Features
+
+* 兼容支持 vue3 语法 ([7a76380](https://github.com/beezen/echarts4taro3/commit/7a76380f1930a842f62aadbc4fb81011b61cdbd3))
+
 ### [1.1.2](https://github.com/beezen/echarts4taro3/compare/v1.1.1...v1.1.2) (2022-08-31)
 
 ### [1.1.1](https://github.com/beezen/echarts4taro3/compare/v1.1.0...v1.1.1) (2022-08-31)

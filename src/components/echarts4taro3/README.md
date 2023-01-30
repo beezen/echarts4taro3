@@ -1,45 +1,21 @@
 # echarts for taro3
 
-基于 Taro 3.x 框架构建的 h5 和微信小程序版本 echarts 跨端组件，及使用示例。
+可运行在 Taro3 上的 Echarts 跨端组件，一套代码可同时运行于 h5 端和小程序端，支持 vue 和 vue3。
 
-## 运行环境
+## 目录
 
-小程序基础库 > 2.9.0
-
-```bash
- Taro CLI 3.4.2 environment info:
-    System:
-      OS: macOS 11.2.3
-      Shell: 5.8 - /bin/zsh
-    Binaries:
-      Node: 16.12.0 - ~/.nvm/versions/node/v16.12.0/bin/node
-      Yarn: 1.22.19 - ~/.nvm/versions/node/v16.12.0/bin/yarn
-      npm: 8.12.1 - ~/.nvm/versions/node/v16.12.0/bin/npm
-    npmPackages:
-      @tarojs/components: 3.4.2 => 3.4.2
-      @tarojs/mini-runner: 3.4.2 => 3.4.2
-      @tarojs/runtime: 3.4.2 => 3.4.2
-      @tarojs/taro: 3.4.2 => 3.4.2
-      @tarojs/webpack-runner: 3.4.2 => 3.4.2
-      babel-preset-taro: 3.4.2 => 3.4.2
-      eslint-config-taro: 3.4.2 => 3.4.2
-```
-
-## 项目下载
-
-方式一：直接下载 echarts4taro3：[Download ZIP](https://github.com/beezen/echarts4taro3/archive/refs/heads/master.zip)
-
-方式二：Use Git or checkout with SVN using the web URL.
-
-```bash
-git clone https://github.com/beezen/echarts4taro3.git
-```
+- [快速开始](#快速开始)
+- [核心 API](#核心-api)
+- [组件效果](#组件效果)
+- [注意事项](#注意事项)
+- [Demo 下载](#demo-下载)
+- [参考资料](#参考资料)
 
 ## 快速开始
 
-### 下载组件
+### 引用组件
 
-方式一：npm 安装引用
+#### 方式一：npm 安装引用（强烈推荐）
 
 1、下载依赖
 
@@ -53,17 +29,17 @@ yarn add echarts4taro3 -S
 import { EChart } from "echarts4taro3";
 ```
 
-方式二：拷贝引用
+#### 方式二：拷贝引用（注：需要开发者主动兼容 vue 和 vue3）
 
 1、下载组件：[点击下载](https://github.com/beezen/echarts4taro3/archive/refs/heads/master.zip)
 
-2、拷贝项目 /src/components 下 `ec-canvas` 跨端组件，到业务项目中直接引用
+2、拷贝项目 /src/components 下 `echarts4taro3` 跨端组件，到业务项目中引用
 
 ```bash
 ## src 目录下
 .
 ├── components
-│   └── ec-canvas # 图表跨端组件
+│   └── echarts4taro3 # 图表跨端组件
 │       ├── ec-canvas
 │       └── echart
 └── pages # 使用示例
@@ -73,19 +49,71 @@ import { EChart } from "echarts4taro3";
 
 ### 使用组件
 
-代码示例如下：
+#### vue3 语法，代码示例如下：
+
+```html
+<template>
+  <view class="bar-chart ">
+    <EChart ref="canvas" />
+  </view>
+</template>
+
+<script setup>
+  import { ref, onMounted } from "vue";
+  import Taro from "@tarojs/taro";
+  import { EChart } from "echarts4taro3";
+  import "./index.less";
+
+  const canvas = ref(null);
+  const options = {
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {
+        type: "shadow",
+      },
+    },
+    xAxis: {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: "bar",
+      },
+    ],
+  };
+
+  onMounted(() => {
+    const echartInstance = canvas.value;
+    Taro.nextTick(() => {
+      echartInstance.refresh(options); // 初始化图表
+      /** 异步更新图表数据 */
+      setInterval(() => {
+        let firstValue = options.series[0].data.shift();
+        options.series[0].data.push(firstValue);
+        echartInstance.setOption(options);
+      }, 2000);
+    });
+  });
+</script>
+```
+
+#### vue 语法，代码示例如下：
 
 ```html
 <template>
   <view class="bar-chart">
-    <e-chart ref="vueref0" canvas-id="bar-canvas" />
+    <e-chart ref="canvas" />
   </view>
 </template>
 
 <script>
   import Taro from "@tarojs/taro";
   import { EChart } from "echarts4taro3";
-  //或者 import { EChart } from "@/components/ec-canvas";
   import "./index.less";
 
   export default {
@@ -121,16 +149,13 @@ import { EChart } from "echarts4taro3";
       };
 
       Taro.nextTick(() => {
-        setTimeout(() => {
-          this.$refs.vueref0.refresh(options); // 初始化图表
-
-          /** 异步更新图表数据 */
-          setInterval(() => {
-            let firstValue = options.series[0].data.shift();
-            options.series[0].data.push(firstValue);
-            this.$refs.vueref0.setOption(options);
-          }, 2000);
-        }, 200);
+        this.$refs.canvas.refresh(options); // 初始化图表
+        /** 异步更新图表数据 */
+        setInterval(() => {
+          let firstValue = options.series[0].data.shift();
+          options.series[0].data.push(firstValue);
+          this.$refs.canvas.setOption(options);
+        }, 2000);
       });
     },
   };
@@ -143,14 +168,13 @@ import { EChart } from "echarts4taro3";
 
 ### 基础使用
 
-```html
-<e-chart ref="vueref0" canvas-id="bar-canvas" />
-```
-
 ```javascript
-this.$refs.vueref0.refresh(options); // 初始化图表
+// ...
+// echartInstance 为 echart 组件实例
 
-this.$refs.vueref0.setOption(options); // 异步更新图表数据
+echartInstance.refresh(options); // 初始化图表
+
+echartInstance.setOption(options); // 异步更新图表数据
 ```
 
 ### 方法
@@ -160,7 +184,7 @@ this.$refs.vueref0.setOption(options); // 异步更新图表数据
 | refresh   | [options](https://echarts.apache.org/zh/option.html) | 创建一个 ECharts 实例，返回 echartsInstance                                                                                         |
 | setOption | [options](https://echarts.apache.org/zh/option.html) | 设置图表实例的配置项以及数据，万能接口，所有参数和数据的修改都可以通过 setOption 完成，ECharts 会合并新的参数和数据，然后刷新图表。 |
 | resize    | resizeOptions                                        | 改变图表尺寸，在容器大小发生改变时需要手动调用。                                                                                    |
-| getChart  |                                                      | 获取图表实例                                                                                                                        |
+| getChart  | 无                                                   | 获取图表实例                                                                                                                        |
 
 【参数解释】
 
@@ -171,7 +195,7 @@ this.$refs.vueref0.setOption(options); // 异步更新图表数据
 - `width` 可显式指定实例宽度，单位为像素。
 - `height` 可显式指定实例高度，单位为像素。
 
-## 效果图
+## 组件效果
 
 <img src="https://img.dongbizhen.com/static/echarts_0113.jpeg" width="400" />
 <img src="https://img.dongbizhen.com/static/echarts_0113_weapp.jpeg" width="400" />
@@ -183,6 +207,16 @@ this.$refs.vueref0.setOption(options); // 异步更新图表数据
 1、因为 echarts 图表库本身体积相对较大，所以开发者可以根据业务需要在 echarts [官网定制](https://echarts.apache.org/zh/builder.html) `echarts.js`，只需替换 ec-canvas 组件目录中 `echarts.js` 文件即可正常使用。
 
 2、在微信小程序中对于应用体积有严格的限制要求，开发者可以通过[分包](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/basic.html)技术对应用进行拆分。
+
+## Demo 下载
+
+方式一：直接下载 echarts4taro3：[Download ZIP](https://github.com/beezen/echarts4taro3/archive/refs/heads/master.zip)
+
+方式二：Use Git or checkout with SVN using the web URL.
+
+```bash
+git clone https://github.com/beezen/echarts4taro3.git
+```
 
 ## 参考资料
 

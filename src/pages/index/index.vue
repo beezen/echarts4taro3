@@ -1,12 +1,12 @@
 <template>
   <view class="bar-chart">
-    <e-chart ref="vueref0" canvas-id="bar-canvas" />
+    <e-chart ref="vueref0" />
   </view>
 </template>
 
 <script>
 import Taro from "@tarojs/taro";
-import { EChart } from "@/components/ec-canvas";
+import { EChart } from "echarts4taro3";
 import "./index.less";
 
 export default {
