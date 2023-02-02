@@ -41,7 +41,7 @@ onMounted(() => {
  * 初始化小程序 canvas 组件，回调相关属性参数给 echarts
  */
 function init(callback) {
-  const query = wx.createSelectorQuery();
+  const query = Taro.createSelectorQuery();
   const { uid } = props;
   query
     .select(`.${uid}`)
