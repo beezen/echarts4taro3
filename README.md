@@ -1,6 +1,8 @@
 # echarts for taro3
 
-可运行在 Taro3 上的 Echarts 跨端组件，一套代码可同时运行于 h5 端和小程序端，支持 vue 和 vue3。
+可运行在 Taro3 上的 Echarts 跨端组件，一套代码可同时运行于 h5 端和小程序端，支持 vue 和 vue3 语法。
+
+由于各个平台小程序兼容问题，目前已支持的有微信小程序，支付宝小程序，字节跳动小程序。
 
 ## 目录
 
@@ -69,22 +71,22 @@ import { EChart } from "echarts4taro3";
     tooltip: {
       trigger: "axis",
       axisPointer: {
-        type: "shadow",
-      },
+        type: "shadow"
+      }
     },
     xAxis: {
       type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     },
     yAxis: {
-      type: "value",
+      type: "value"
     },
     series: [
       {
         data: [120, 200, 150, 80, 70, 110, 130],
-        type: "bar",
-      },
-    ],
+        type: "bar"
+      }
+    ]
   };
 
   onMounted(() => {
@@ -119,7 +121,7 @@ import { EChart } from "echarts4taro3";
   export default {
     name: "Index",
     components: {
-      EChart,
+      EChart
     },
     data() {
       return {};
@@ -130,22 +132,22 @@ import { EChart } from "echarts4taro3";
           trigger: "axis",
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
-            type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
-          },
+            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
+          }
         },
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         },
         yAxis: {
-          type: "value",
+          type: "value"
         },
         series: [
           {
             data: [120, 200, 150, 80, 70, 110, 130],
-            type: "bar",
-          },
-        ],
+            type: "bar"
+          }
+        ]
       };
 
       Taro.nextTick(() => {
@@ -157,7 +159,7 @@ import { EChart } from "echarts4taro3";
           this.$refs.canvas.setOption(options);
         }, 2000);
       });
-    },
+    }
   };
 </script>
 ```

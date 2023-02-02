@@ -4,7 +4,9 @@
 </template>
 
 <script setup>
+import "./polyfill";
 import { reactive, ref } from "vue-demi";
+import Taro from "@tarojs/taro";
 import * as echarts from "../ec-canvas/echarts";
 import EcCanvas from "../ec-canvas/index";
 
@@ -27,7 +29,7 @@ function setOption(data) {
 function resize(options) {
   chartInstance.resize({
     width: options.width,
-    height: options.height,
+    height: options.height
   });
 }
 
@@ -50,7 +52,7 @@ function refresh(data) {
       chartInstance = echarts.init(canvas, null, {
         width: width,
         height: height,
-        devicePixelRatio: canvasDpr,
+        devicePixelRatio: canvasDpr
       });
       canvas.setChart(chartInstance);
       // 优化图表尺寸未获取到情况
@@ -58,13 +60,13 @@ function refresh(data) {
         let count = 0;
         const doFn = () => {
           count++;
-          wx.createSelectorQuery()
+          Taro.createSelectorQuery()
             .select(`.${uid.value}`)
             .fields({
               node: true,
-              size: true,
+              size: true
             })
-            .exec((res) => {
+            .exec(res => {
               const canvasWidth = res[0].width;
               const canvasHeight = res[0].height;
               if ((!canvasWidth || !canvasHeight) && count < 20) {
@@ -72,7 +74,7 @@ function refresh(data) {
               } else {
                 chartInstance.resize({
                   width: canvasWidth,
-                  height: canvasHeight,
+                  height: canvasHeight
                 });
                 chartInstance.setOption(data);
               }
@@ -92,7 +94,7 @@ defineExpose({
   getChart,
   setOption,
   resize,
-  refresh,
+  refresh
 });
 </script>
 
