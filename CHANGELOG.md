@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/beezen/echarts4taro3/compare/v1.2.0...v1.3.0) (2023-02-02)
+
+
+### Features
+
+* 新增支持支付宝小程序和字节跳动小程序 ([cce70af](https://github.com/beezen/echarts4taro3/commit/cce70afcf8007371f38d71718b96fa80fecffa5a))
+
 ## [1.2.0](https://github.com/beezen/echarts4taro3/compare/v1.1.2...v1.2.0) (2023-01-30)
 
 
