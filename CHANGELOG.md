@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/beezen/echarts4taro3/compare/v1.3.0...v1.3.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* 优化 echarts 实例获取失败问题 ([e6516cc](https://github.com/beezen/echarts4taro3/commit/e6516cce6ca2c73a46fc9dfc8a201c297ec70f2d))
+
 ## [1.3.0](https://github.com/beezen/echarts4taro3/compare/v1.2.0...v1.3.0) (2023-02-02)
 
 

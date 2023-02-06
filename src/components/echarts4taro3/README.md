@@ -7,7 +7,10 @@
 ## 目录
 
 - [快速开始](#快速开始)
-- [核心 API](#核心-api)
+  - [组件引用](#组件引用)
+  - [基础用法](#基础用法)
+  - [进阶用法](#进阶用法)
+- [组件实例方法](#组件实例方法)
 - [组件效果](#组件效果)
 - [注意事项](#注意事项)
 - [Demo 下载](#demo-下载)
@@ -15,7 +18,7 @@
 
 ## 快速开始
 
-### 引用组件
+### 组件引用
 
 #### 方式一：npm 安装引用（强烈推荐）
 
@@ -49,7 +52,7 @@ import { EChart } from "echarts4taro3";
     └── index
 ```
 
-### 使用组件
+### 基础用法
 
 #### vue3 语法，代码示例如下：
 
@@ -90,15 +93,17 @@ import { EChart } from "echarts4taro3";
   };
 
   onMounted(() => {
-    const echartInstance = canvas.value;
+    const echartComponentInstance = canvas.value; // 组件实例
     Taro.nextTick(() => {
-      echartInstance.refresh(options); // 初始化图表
-      /** 异步更新图表数据 */
-      setInterval(() => {
-        let firstValue = options.series[0].data.shift();
-        options.series[0].data.push(firstValue);
-        echartInstance.setOption(options);
-      }, 2000);
+      // 初始化图表
+      echartComponentInstance.refresh(options).then(myChart => {
+        /** 异步更新图表数据 */
+        setInterval(() => {
+          let firstValue = options.series[0].data.shift();
+          options.series[0].data.push(firstValue);
+          myChart.setOption(options); // myChart 即为 echarts 实例，可使用的实例方法，具体可参考 echarts 官网
+        }, 2000);
+      });
     });
   });
 </script>
@@ -151,42 +156,129 @@ import { EChart } from "echarts4taro3";
       };
 
       Taro.nextTick(() => {
-        this.$refs.canvas.refresh(options); // 初始化图表
-        /** 异步更新图表数据 */
-        setInterval(() => {
-          let firstValue = options.series[0].data.shift();
-          options.series[0].data.push(firstValue);
-          this.$refs.canvas.setOption(options);
-        }, 2000);
+        // 初始化图表
+        this.$refs.canvas.refresh(options).then(myChart => {
+          /** 异步更新图表数据 */
+          setInterval(() => {
+            let firstValue = options.series[0].data.shift();
+            options.series[0].data.push(firstValue);
+            myChart.setOption(options);
+          }, 2000);
+        });
       });
     }
   };
 </script>
 ```
 
-## 核心 API
+### 进阶用法
+
+#### 通过 `setOption` 方法动态改变 echarts 数据
+
+```javascript
+let myChart;
+onMounted(() => {
+  const echartComponentInstance = canvas.value;
+  Taro.nextTick(() => {
+    setTimeout(() => {
+      echartComponentInstance.refresh(options).then(myChartInstance => {
+        myChart = myChartInstance;
+      });
+    }, 100);
+  });
+});
+
+// ...
+// 点击设置图表数据
+function handleSetOptions(data) {
+  myChart.setOption(data);
+}
+```
+
+#### 通过 `getOption` 方法获取当前实例的配置信息
+
+```javascript
+let myChart;
+onMounted(() => {
+  const echartComponentInstance = canvas.value;
+  Taro.nextTick(() => {
+    setTimeout(() => {
+      echartComponentInstance.refresh(options).then(myChartInstance => {
+        myChart = myChartInstance;
+      });
+    }, 100);
+  });
+});
+
+// ...
+// 点击获取图表数据
+function handleGetOptions() {
+  console.log(myChart.getOption());
+}
+```
+
+#### 通过 `getChart` 直接获取当前图表实例
+
+```javascript
+onMounted(() => {
+  const echartComponentInstance = canvas.value;
+  Taro.nextTick(() => {
+    setTimeout(() => {
+      echartComponentInstance.refresh(options).
+    }, 100);
+  });
+});
+
+// ...
+// 点击获取图表 echarts 实例
+function handleGetEcharts() {
+  const echartComponentInstance = canvas.value;
+  const myChart = echartComponentInstance.getChart();
+  console.log(myChart);
+  // 后续可进行相关 echarts 操作
+  // myChart.setOption(data);
+  // myChart.resize(data);
+}
+```
+
+## 组件实例方法
 
 > 引入 EChart 组件后，拿到 EChart 组件实例，并调用实例 refresh(options)方法设置图表数据。具体可参考官方 [options 配置项](https://echarts.apache.org/zh/option.html)和[Demo 示例](https://echarts.apache.org/examples/zh/index.html)。
 
-### 基础使用
+### 示例
 
-```javascript
+```vue3
+<template>
+  <EChart ref="canvas" />
+</template>
+
+<script setup>
 // ...
-// echartInstance 为 echart 组件实例
 
-echartInstance.refresh(options); // 初始化图表
+onMounted(() => {
+  const echartComponentInstance = canvas.value; // 组件实例
+  Taro.nextTick(() => {
+    setTimeout(() => {
+      echartComponentInstance.refresh(options); // 初始化图表
+    }, 100);
+  });
 
-echartInstance.setOption(options); // 异步更新图表数据
+  // ...
+  setTimeout(()=>{
+    echartComponentInstance.setOption(options); // 异步更新图表数据，需要等 refresh 方法实例化完成
+  },200)
+});
+</script>
 ```
 
 ### 方法
 
-| 方法      | 参数                                                 | 描述                                                                                                                                |
-| --------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| refresh   | [options](https://echarts.apache.org/zh/option.html) | 创建一个 ECharts 实例，返回 echartsInstance                                                                                         |
-| setOption | [options](https://echarts.apache.org/zh/option.html) | 设置图表实例的配置项以及数据，万能接口，所有参数和数据的修改都可以通过 setOption 完成，ECharts 会合并新的参数和数据，然后刷新图表。 |
-| resize    | resizeOptions                                        | 改变图表尺寸，在容器大小发生改变时需要手动调用。                                                                                    |
-| getChart  | 无                                                   | 获取图表实例                                                                                                                        |
+| 方法      | 参数                                                              | 描述                                                                                                                      |
+| --------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| refresh   | ([options](https://echarts.apache.org/zh/option.html) ,callback ) | 创建一个 echarts 实例，返回 echartsInstance                                                                               |
+| setOption | ([options](https://echarts.apache.org/zh/option.html) )           | 设置图表实例的配置项以及数据，所有参数和数据的修改都可以通过 setOption 完成，echarts 会合并新的参数和数据，然后刷新图表。 |
+| resize    | (resizeOptions)                                                   | 改变图表尺寸，在容器大小发生改变时需要手动调用。                                                                          |
+| getChart  | 无                                                                | 获取图表 echarts 实例，来完成更多自定义效果                                                                               |
 
 【参数解释】
 
@@ -209,6 +301,8 @@ echartInstance.setOption(options); // 异步更新图表数据
 1、因为 echarts 图表库本身体积相对较大，所以开发者可以根据业务需要在 echarts [官网定制](https://echarts.apache.org/zh/builder.html) `echarts.js`，只需替换 ec-canvas 组件目录中 `echarts.js` 文件即可正常使用。
 
 2、在微信小程序中对于应用体积有严格的限制要求，开发者可以通过[分包](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/basic.html)技术对应用进行拆分。
+
+3、组件初始化 `refresh` 方法需要在页面组件节点挂载完成后才能调用。
 
 ## Demo 下载
 
