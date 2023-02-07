@@ -1,8 +1,10 @@
 # echarts for taro3
 
-可运行在 Taro3 上的 Echarts 跨端组件，一套代码可同时运行于 h5 端和小程序端，支持 vue 和 vue3 语法。
+![npm](https://img.shields.io/npm/v/echarts4taro3?color=42b883)
 
-由于各个平台小程序兼容问题，目前已支持的有微信小程序，支付宝小程序，字节跳动小程序。
+`echarts4taro3` 是一个可运行在 Taro3 框架上的 Echarts 跨端组件，满足开发者使用一套 vue 或 vue3 代码，就让图表流畅的展示于 h5 和小程序端。
+
+目前已支持的平台包含：H5、微信小程序、支付宝小程序和字节跳动小程序。
 
 ## 目录
 
@@ -38,7 +40,7 @@ import { EChart } from "echarts4taro3";
 
 1、下载组件：[点击下载](https://github.com/beezen/echarts4taro3/archive/refs/heads/master.zip)
 
-2、拷贝项目 /src/components 下 `echarts4taro3` 跨端组件，到业务项目中引用
+2、拷贝项目 `/lib` 目录下内容到项目中，并命名为 `echarts4taro3`。业务项目结构如下：
 
 ```bash
 ## src 目录下
@@ -74,29 +76,29 @@ import { EChart } from "echarts4taro3";
     tooltip: {
       trigger: "axis",
       axisPointer: {
-        type: "shadow"
-      }
+        type: "shadow",
+      },
     },
     xAxis: {
       type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: "value"
+      type: "value",
     },
     series: [
       {
         data: [120, 200, 150, 80, 70, 110, 130],
-        type: "bar"
-      }
-    ]
+        type: "bar",
+      },
+    ],
   };
 
   onMounted(() => {
     const echartComponentInstance = canvas.value; // 组件实例
     Taro.nextTick(() => {
       // 初始化图表
-      echartComponentInstance.refresh(options).then(myChart => {
+      echartComponentInstance.refresh(options).then((myChart) => {
         /** 异步更新图表数据 */
         setInterval(() => {
           let firstValue = options.series[0].data.shift();
@@ -126,7 +128,7 @@ import { EChart } from "echarts4taro3";
   export default {
     name: "Index",
     components: {
-      EChart
+      EChart,
     },
     data() {
       return {};
@@ -137,27 +139,27 @@ import { EChart } from "echarts4taro3";
           trigger: "axis",
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
-            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
-          }
+            type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+          },
         },
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
         yAxis: {
-          type: "value"
+          type: "value",
         },
         series: [
           {
             data: [120, 200, 150, 80, 70, 110, 130],
-            type: "bar"
-          }
-        ]
+            type: "bar",
+          },
+        ],
       };
 
       Taro.nextTick(() => {
         // 初始化图表
-        this.$refs.canvas.refresh(options).then(myChart => {
+        this.$refs.canvas.refresh(options).then((myChart) => {
           /** 异步更新图表数据 */
           setInterval(() => {
             let firstValue = options.series[0].data.shift();
@@ -166,7 +168,7 @@ import { EChart } from "echarts4taro3";
           }, 2000);
         });
       });
-    }
+    },
   };
 </script>
 ```
@@ -181,7 +183,7 @@ onMounted(() => {
   const echartComponentInstance = canvas.value;
   Taro.nextTick(() => {
     setTimeout(() => {
-      echartComponentInstance.refresh(options).then(myChartInstance => {
+      echartComponentInstance.refresh(options).then((myChartInstance) => {
         myChart = myChartInstance;
       });
     }, 100);
@@ -203,7 +205,7 @@ onMounted(() => {
   const echartComponentInstance = canvas.value;
   Taro.nextTick(() => {
     setTimeout(() => {
-      echartComponentInstance.refresh(options).then(myChartInstance => {
+      echartComponentInstance.refresh(options).then((myChartInstance) => {
         myChart = myChartInstance;
       });
     }, 100);
