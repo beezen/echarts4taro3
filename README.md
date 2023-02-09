@@ -293,8 +293,7 @@ onMounted(() => {
 
 ## 组件效果
 
-<img src="https://img.dongbizhen.com/static/echarts_0113.jpeg" width="400" />
-<img src="https://img.dongbizhen.com/static/echarts_0113_weapp.jpeg" width="400" />
+<img src="https://img.dongbizhen.com/blog/202302091707.png" width="400" />
 
 ## 注意事项
 
