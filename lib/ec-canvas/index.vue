@@ -50,6 +50,8 @@ function init(callback) {
       size: true
     })
     .exec(res => {
+      // 页面跳转 bug https://github.com/beezen/echarts4taro3/issues/15
+      if (res[0] === null) return
       const canvasDpr = Taro.getSystemInfoSync().pixelRatio;
       const canvasNode = res[0].node;
       const canvasWidth = res[0].width;
