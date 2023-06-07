@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/beezen/echarts4taro3/compare/v1.4.1...v1.4.2) (2023-06-07)
+
+
+### Bug Fixes
+
+* 优化 canvas 未实例化时调用报错问题 ([091a62a](https://github.com/beezen/echarts4taro3/commit/091a62a6bd724c679916a7ae5a0aa535e7c8af64))
+
 ### [1.4.1](https://github.com/beezen/echarts4taro3/compare/v1.3.1...v1.4.1) (2023-02-07)
 
 ### [1.3.1](https://github.com/beezen/echarts4taro3/compare/v1.3.0...v1.3.1) (2023-02-06)
