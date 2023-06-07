@@ -1,0 +1,9 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "demo-hola-0.1.7-vue3",
+  "appid": "testAppId",
+  "setting": {
+    "es6": false,
+    "minified": false
+  }
+}

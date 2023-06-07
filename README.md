@@ -2,9 +2,9 @@
 
 ![npm](https://img.shields.io/npm/v/echarts4taro3?color=42b883)
 
-`echarts4taro3` 是一个可运行在 Taro3 框架上的 Echarts 跨端组件，满足开发者使用一套 vue 或 vue3 代码，就让图表流畅的展示于 h5 和小程序端。
+`echarts4taro3` 是一个可运行在 Taro3 框架上的 Echarts 跨端组件，满足开发者使用一套 **vue** 或 **vue3** 代码，就让图表流畅的展示于 **H5** 和**小程序端**。
 
-目前已支持的平台包含：H5、微信小程序、支付宝小程序和字节跳动小程序。
+目前已支持的平台包含：**H5**、**微信小程序**、**支付宝小程序**和**字节跳动小程序**。
 
 ## 目录
 
@@ -40,7 +40,7 @@ import { EChart } from "echarts4taro3";
 
 1、下载组件：[点击下载](https://github.com/beezen/echarts4taro3/archive/refs/heads/master.zip)
 
-2、拷贝项目 `/lib` 目录下内容到项目中，并命名为 `echarts4taro3`。业务项目结构如下：
+2、拷贝项目 `/lib` 目录下内容到项目中，可命名为 `echarts4taro3`，业务逻辑中这样引用 `import { EChart } from "@components/echarts4taro3/index.js"`。业务项目结构如下：
 
 ```bash
 ## src 目录下
@@ -48,7 +48,8 @@ import { EChart } from "echarts4taro3";
 ├── components
 │   └── echarts4taro3 # 图表跨端组件
 │       ├── ec-canvas
-│       └── echart
+│       ├── echart
+│       └── index.js
 └── pages # 使用示例
     ├── ecchart
     └── index
@@ -76,22 +77,22 @@ import { EChart } from "echarts4taro3";
     tooltip: {
       trigger: "axis",
       axisPointer: {
-        type: "shadow",
-      },
+        type: "shadow"
+      }
     },
     xAxis: {
       type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     },
     yAxis: {
-      type: "value",
+      type: "value"
     },
     series: [
       {
         data: [120, 200, 150, 80, 70, 110, 130],
-        type: "bar",
-      },
-    ],
+        type: "bar"
+      }
+    ]
   };
 
   onMounted(() => {
@@ -128,7 +129,7 @@ import { EChart } from "echarts4taro3";
   export default {
     name: "Index",
     components: {
-      EChart,
+      EChart
     },
     data() {
       return {};
@@ -139,22 +140,22 @@ import { EChart } from "echarts4taro3";
           trigger: "axis",
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
-            type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
-          },
+            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
+          }
         },
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         },
         yAxis: {
-          type: "value",
+          type: "value"
         },
         series: [
           {
             data: [120, 200, 150, 80, 70, 110, 130],
-            type: "bar",
-          },
-        ],
+            type: "bar"
+          }
+        ]
       };
 
       Taro.nextTick(() => {
@@ -168,7 +169,7 @@ import { EChart } from "echarts4taro3";
           }, 2000);
         });
       });
-    },
+    }
   };
 </script>
 ```
@@ -182,11 +183,9 @@ let myChart;
 onMounted(() => {
   const echartComponentInstance = canvas.value;
   Taro.nextTick(() => {
-    setTimeout(() => {
-      echartComponentInstance.refresh(options).then((myChartInstance) => {
-        myChart = myChartInstance;
-      });
-    }, 100);
+    echartComponentInstance.refresh(options).then((myChartInstance) => {
+      myChart = myChartInstance;
+    });
   });
 });
 
@@ -204,11 +203,9 @@ let myChart;
 onMounted(() => {
   const echartComponentInstance = canvas.value;
   Taro.nextTick(() => {
-    setTimeout(() => {
-      echartComponentInstance.refresh(options).then((myChartInstance) => {
-        myChart = myChartInstance;
-      });
-    }, 100);
+    echartComponentInstance.refresh(options).then((myChartInstance) => {
+      myChart = myChartInstance;
+    });
   });
 });
 
@@ -225,9 +222,7 @@ function handleGetOptions() {
 onMounted(() => {
   const echartComponentInstance = canvas.value;
   Taro.nextTick(() => {
-    setTimeout(() => {
-      echartComponentInstance.refresh(options).
-    }, 100);
+    echartComponentInstance.refresh(options);
   });
 });
 
@@ -260,9 +255,7 @@ function handleGetEcharts() {
 onMounted(() => {
   const echartComponentInstance = canvas.value; // 组件实例
   Taro.nextTick(() => {
-    setTimeout(() => {
       echartComponentInstance.refresh(options); // 初始化图表
-    }, 100);
   });
 
   // ...
@@ -275,12 +268,12 @@ onMounted(() => {
 
 ### 方法
 
-| 方法      | 参数                                                              | 描述                                                                                                                      |
-| --------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| refresh   | ([options](https://echarts.apache.org/zh/option.html) ,callback ) | 创建一个 echarts 实例，返回 echartsInstance                                                                               |
-| setOption | ([options](https://echarts.apache.org/zh/option.html) )           | 设置图表实例的配置项以及数据，所有参数和数据的修改都可以通过 setOption 完成，echarts 会合并新的参数和数据，然后刷新图表。 |
-| resize    | (resizeOptions)                                                   | 改变图表尺寸，在容器大小发生改变时需要手动调用。                                                                          |
-| getChart  | 无                                                                | 获取图表 echarts 实例，来完成更多自定义效果                                                                               |
+| 方法      | 参数                                                                | 描述                                                                                                                      |
+| --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| refresh   | ([options](https://echarts.apache.org/zh/option.html) ,[callback] ) | 创建一个 echarts 实例，返回 echartsInstance                                                                               |
+| setOption | ([options](https://echarts.apache.org/zh/option.html) )             | 设置图表实例的配置项以及数据，所有参数和数据的修改都可以通过 setOption 完成，echarts 会合并新的参数和数据，然后刷新图表。 |
+| resize    | (resizeOptions)                                                     | 改变图表尺寸，在容器大小发生改变时需要手动调用。                                                                          |
+| getChart  | 无                                                                  | 获取图表 echarts 实例，来完成更多自定义效果                                                                               |
 
 【参数解释】
 
@@ -293,8 +286,7 @@ onMounted(() => {
 
 ## 组件效果
 
-<img src="https://img.dongbizhen.com/static/echarts_0113.jpeg" width="400" />
-<img src="https://img.dongbizhen.com/static/echarts_0113_weapp.jpeg" width="400" />
+<img src="https://img.dongbizhen.com/blog/202302091707.png" width="400" />
 
 ## 注意事项
 
@@ -315,6 +307,9 @@ onMounted(() => {
 ```bash
 git clone https://github.com/beezen/echarts4taro3.git
 ```
+
+- [vue2 demo](https://github.com/beezen/echarts4taro3/tree/master/examples/demo-vue2)
+- [vue3 demo](https://github.com/beezen/echarts4taro3/tree/master/examples/demo-vue3)
 
 ## 参考资料
 

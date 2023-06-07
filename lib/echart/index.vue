@@ -19,28 +19,31 @@ let chartInstance = null; // chart 实例
  * 获取 chart 实例
  */
 function getChart() {
-  if (!chartInstance)
+  if (!chartInstance) {
     return console.error(
       "echart 实例化还未完成，可参考使用说明：https://github.com/beezen/echarts4taro3#基础用法"
     );
+  }
   return chartInstance;
 }
 
 /** 更新图表数据 */
 function setOption(data) {
-  if (!chartInstance)
+  if (!chartInstance) {
     return console.error(
       "echart 实例化还未完成，可参考使用说明：https://github.com/beezen/echarts4taro3#基础用法"
     );
+  }
   chartInstance.setOption(data);
 }
 
 /** 改变图表尺寸 */
 function resize(options) {
-  if (!chartInstance)
+  if (!chartInstance) {
     return console.error(
       "echart 实例化还未完成，可参考使用说明：https://github.com/beezen/echarts4taro3#基础用法"
     );
+  }
   chartInstance.resize({
     width: options.width,
     height: options.height
@@ -54,12 +57,13 @@ function resize(options) {
  * @param callback 回调函数，返回 echart 实例
  */
 function refresh(data, callback) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (process.env.TARO_ENV === "h5") {
       // h5 模式
       const canvasDom = document.querySelector(`#${uid.value}`);
       chartInstance = echarts.init(canvasDom);
       chartInstance.setOption(data);
+      if (typeof callback === "function") callback(chartInstance);
       resolve(chartInstance);
     } else {
       // 小程序模式
@@ -82,7 +86,7 @@ function refresh(data, callback) {
                 node: true,
                 size: true
               })
-              .exec(res => {
+              .exec((res) => {
                 const canvasWidth = res[0].width;
                 const canvasHeight = res[0].height;
                 if ((!canvasWidth || !canvasHeight) && count < 20) {
@@ -100,6 +104,7 @@ function refresh(data, callback) {
         } else {
           chartInstance.setOption(data);
         }
+        if (typeof callback === "function") callback(chartInstance);
         resolve(chartInstance);
         return chartInstance;
       });

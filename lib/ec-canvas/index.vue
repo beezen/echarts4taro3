@@ -24,10 +24,10 @@ let chartInstance; // 当前图表实例
 
 onMounted(() => {
   if (process.env.TARO_ENV === "h5") return;
-  echarts.registerPreprocessor(option => {
+  echarts.registerPreprocessor((option) => {
     if (option && option.series) {
       if (option.series.length > 0) {
-        option.series.forEach(series => {
+        option.series.forEach((series) => {
           series.progressive = 0;
         });
       } else if (typeof option.series === "object") {
@@ -43,28 +43,32 @@ onMounted(() => {
 function init(callback) {
   const query = Taro.createSelectorQuery();
   const { uid } = props;
-  query
-    .select(`.${uid}`)
-    .fields({
-      node: true,
-      size: true
-    })
-    .exec(res => {
-      // 页面跳转 bug https://github.com/beezen/echarts4taro3/issues/15
-      if (res[0] === null) return
-      const canvasDpr = Taro.getSystemInfoSync().pixelRatio;
-      const canvasNode = res[0].node;
-      const canvasWidth = res[0].width;
-      const canvasHeight = res[0].height;
-      const ctx = canvasNode.getContext("2d");
-      const wxCanvas = new WxCanvas(ctx, true, canvasNode);
-      echarts.setCanvasCreator(() => {
-        return wxCanvas;
+  Taro.nextTick(() => {
+    query
+      .select(`.${uid}`)
+      .fields({
+        node: true,
+        size: true
+      })
+      .exec((res) => {
+        if (!res[0]) {
+          console.error("未查询到已加载的 canvas 节点；请在 nextTick 中执行 refresh 方法");
+          return;
+        }
+        const canvasDpr = Taro.getSystemInfoSync().pixelRatio;
+        const canvasNode = res[0].node;
+        const canvasWidth = res[0].width;
+        const canvasHeight = res[0].height;
+        const ctx = canvasNode.getContext("2d");
+        const wxCanvas = new WxCanvas(ctx, true, canvasNode);
+        echarts.setCanvasCreator(() => {
+          return wxCanvas;
+        });
+        if (typeof callback === "function") {
+          chartInstance = callback(wxCanvas, canvasWidth, canvasHeight, canvasDpr);
+        }
       });
-      if (typeof callback === "function") {
-        chartInstance = callback(wxCanvas, canvasWidth, canvasHeight, canvasDpr);
-      }
-    });
+  });
 }
 
 /** 触摸事件包装 */
@@ -98,6 +102,7 @@ function touchStart(e) {
     handler.processGesture(wrapTouch(e), "start");
   }
 }
+
 function touchMove(e) {
   if (chartInstance && e.touches.length > 0) {
     var touch = e.touches[0];
