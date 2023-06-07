@@ -1,9 +1,0 @@
-{
-  "project": "demo-hola-0.1.7-vue3",
-  "version": "0.0.1",
-  "desc": "Just For Fun",
-  "type": "hola",
-  "dist": "build",
-  "plugins": ["hola"],
-  "link_id": ""
-}

@@ -308,6 +308,9 @@ onMounted(() => {
 git clone https://github.com/beezen/echarts4taro3.git
 ```
 
+- [vue2 demo](https://github.com/beezen/echarts4taro3/tree/master/examples/demo-vue2)
+- [vue3 demo](https://github.com/beezen/echarts4taro3/tree/master/examples/demo-vue3)
+
 ## 参考资料
 
 - [在微信小程序中使用 Apache ECharts](https://github.com/ecomfe/echarts-for-weixin)
