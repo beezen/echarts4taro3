@@ -30,7 +30,7 @@
     "@tarojs/components": "3.4.2",
     "@tarojs/runtime": "3.4.2",
     "@tarojs/taro": "3.4.2",
-    "echarts4taro3": "file:.yalc/echarts4taro3",
+    "echarts4taro3": "latest",
     "vue": "^2.5.0",
     "vue-template-compiler": "^2.5.0",
     "vuex": "^3.0.0"
