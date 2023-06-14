@@ -308,8 +308,21 @@ onMounted(() => {
 git clone https://github.com/beezen/echarts4taro3.git
 ```
 
+在 `examples/` 目录下存在相关功能实现示例：
+
 - [vue2 demo](https://github.com/beezen/echarts4taro3/tree/master/examples/demo-vue2)
 - [vue3 demo](https://github.com/beezen/echarts4taro3/tree/master/examples/demo-vue3)
+
+快速运行
+
+```bash
+# 在对应的 demo 根目录下执行
+
+$ yarn # 安装依赖
+
+$ yarn dev:weapp # 运行微信小程序
+$ yarn dev:h5 # 运行 H5
+```
 
 ## 参考资料
 

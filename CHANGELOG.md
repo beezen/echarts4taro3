@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://github.com/beezen/echarts4taro3/compare/v1.4.2...v1.4.3) (2023-06-14)
+
+
+### Bug Fixes
+
+* 修复echarts实例dispose执行报错问题 ([3e4404f](https://github.com/beezen/echarts4taro3/commit/3e4404f6255bb66e43ff8ab00cbb4875662f8079))
+
 ### [1.4.2](https://github.com/beezen/echarts4taro3/compare/v1.4.1...v1.4.2) (2023-06-07)
 
 
