@@ -7,9 +7,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Taro from "@tarojs/taro";
-import { EChart } from "echarts4taro3";
+import * as echarts from "./assets/echarts";
+import { EChart, getEcharts, loadEcharts } from "echarts4taro3";
 import "./index.less";
-
+loadEcharts(echarts);
 const canvas = ref(null);
 const options = {
   tooltip: {

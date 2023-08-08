@@ -11,9 +11,10 @@
 <script setup>
 import Taro from "@tarojs/taro";
 import { onMounted } from "vue-demi";
-import * as echarts from "./echarts";
+import { getEcharts } from "../common/index";
 import WxCanvas from "./wx-canvas";
 
+let echarts = getEcharts(); // 获取 echarts 模块
 const props = defineProps({
   uid: {
     type: String,
