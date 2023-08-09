@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/beezen/echarts4taro3/compare/v1.4.4...v1.5.0) (2023-08-09)
+
+
+### Features
+
+* 新增支持自定义导入echarts三方库 ([366ef7a](https://github.com/beezen/echarts4taro3/commit/366ef7aa5c4aca9b815f8f642396342cd4c288df))
+
 ### [1.4.4](https://github.com/beezen/echarts4taro3/compare/v1.4.3...v1.4.4) (2023-08-08)
 
 
