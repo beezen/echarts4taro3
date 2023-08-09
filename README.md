@@ -6,6 +6,8 @@
 
 目前已支持的平台包含：**H5**、**微信小程序**、**支付宝小程序**和**字节跳动小程序**。
 
+支持开发者导入自定义 echarts 库。
+
 ## 目录
 
 - [快速开始](#快速开始)
@@ -47,6 +49,8 @@ import { EChart } from "echarts4taro3";
 .
 ├── components
 │   └── echarts4taro3 # 图表跨端组件
+│       ├── assets
+│       ├── common
 │       ├── ec-canvas
 │       ├── echart
 │       └── index.js
@@ -176,6 +180,14 @@ import { EChart } from "echarts4taro3";
 
 ### 进阶用法
 
+#### 通过 `loadEcharts` 方法导入自定义的 echarts 库
+
+```javascript
+import * as echarts from "./assets/echarts"; // 根据需求自定义的 echarts 库
+import { EChart, loadEcharts } from "echarts4taro3";
+loadEcharts(echarts); // 给组件导入自定义的 echarts 库
+```
+
 #### 通过 `setOption` 方法动态改变 echarts 数据
 
 ```javascript
@@ -292,7 +304,7 @@ onMounted(() => {
 
 对于网页加载速度或者微信小程序包体积大小有要求的，可以做如下调整：
 
-1、因为 echarts 图表库本身体积相对较大，所以开发者可以根据业务需要在 echarts [官网定制](https://echarts.apache.org/zh/builder.html) `echarts.js`，只需替换 ec-canvas 组件目录中 `echarts.js` 文件即可正常使用。
+1、因为 echarts 图表库本身体积相对较大，所以开发者可以根据业务需要在 echarts [官网定制](https://echarts.apache.org/zh/builder.html) `echarts.js`，然后通过 `loadEcharts` 方法动态导入，或者替换 lib/assets 目录中 `echarts.js` 文件也可正常使用。
 
 2、在微信小程序中对于应用体积有严格的限制要求，开发者可以通过[分包](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/basic.html)技术对应用进行拆分。
 

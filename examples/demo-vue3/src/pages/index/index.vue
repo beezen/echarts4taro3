@@ -8,7 +8,7 @@
 import { ref, onMounted } from "vue";
 import Taro from "@tarojs/taro";
 import * as echarts from "./assets/echarts";
-import { EChart, getEcharts, loadEcharts } from "echarts4taro3";
+import { EChart, loadEcharts } from "echarts4taro3";
 import "./index.less";
 loadEcharts(echarts);
 const canvas = ref(null);
