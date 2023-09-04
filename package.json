@@ -1,6 +1,6 @@
 {
   "name": "echarts4taro3",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "是一个可运行在 Taro3 框架上的 Echarts 跨端组件，满足开发者使用一套 vue 或 vue3 代码，就让图表流畅的展示于 h5 和小程序端",
   "main": "./lib/index.js",
   "scripts": {

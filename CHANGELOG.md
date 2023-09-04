@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/beezen/echarts4taro3/compare/v1.5.0...v1.6.0) (2023-09-04)
+
+
+### Features
+
+* 优化h5端初始化图表大小异常问题和添加loadEcharts加载失败的日志 ([00fee73](https://github.com/beezen/echarts4taro3/commit/00fee73ec9e5fb2900d58783df4f728c01c5d864))
+
 ## [1.5.0](https://github.com/beezen/echarts4taro3/compare/v1.4.4...v1.5.0) (2023-08-09)
 
 
