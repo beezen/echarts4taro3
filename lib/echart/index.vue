@@ -61,10 +61,20 @@ function refresh(data, callback) {
     if (process.env.TARO_ENV === "h5") {
       // h5 模式
       const canvasDom = document.querySelector(`#${uid.value}`);
-      chartInstance = echarts.init(canvasDom);
-      chartInstance.setOption(data);
-      if (typeof callback === "function") callback(chartInstance);
-      resolve(chartInstance);
+      let count = 0;
+      const loopAction = () => {
+        if ((!canvasDom.clientWidth || !canvasDom.clientHeight) && count <= 50) {
+          // 兼容 echarts 逻辑判断
+          count++;
+          setTimeout(loopAction, 60);
+          return;
+        }
+        chartInstance = echarts.init(canvasDom);
+        chartInstance.setOption(data);
+        if (typeof callback === "function") callback(chartInstance);
+        resolve(chartInstance);
+      };
+      loopAction();
     } else {
       // 小程序模式
       const canvasInstance = canvas.value;

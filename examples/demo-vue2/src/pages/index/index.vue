@@ -43,14 +43,12 @@ export default {
     };
 
     Taro.nextTick(() => {
-      setTimeout(() => {
-        this.$refs.vueref0.refresh(option); // 初始化图表
-        setInterval(() => {
-          let firstValue = option.series[0].data.shift();
-          option.series[0].data.push(firstValue);
-          this.$refs.vueref0.setOption(option); // 异步更新图表数据
-        }, 2000);
-      }, 200);
+      this.$refs.vueref0.refresh(option); // 初始化图表
+      setInterval(() => {
+        let firstValue = option.series[0].data.shift();
+        option.series[0].data.push(firstValue);
+        this.$refs.vueref0.setOption(option); // 异步更新图表数据
+      }, 2000);
     });
   }
 };
