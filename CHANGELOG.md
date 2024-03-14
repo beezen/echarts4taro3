@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/beezen/echarts4taro3/compare/v1.6.0...v1.7.0) (2024-03-14)
+
+
+### Features
+
+* 破坏性升级: 移除内置的 echarts.js, 统一采用 loadEcharts 方法手动注册 echarts.js 库 ([69aeda8](https://github.com/beezen/echarts4taro3/commit/69aeda816e9947e4370c5436de96395f8befcdb1))
+
 ## [1.6.0](https://github.com/beezen/echarts4taro3/compare/v1.5.0...v1.6.0) (2023-09-04)
 
 
