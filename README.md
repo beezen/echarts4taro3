@@ -6,7 +6,7 @@
 
 目前已支持的平台包含：**H5**、**微信小程序**、**支付宝小程序**和**字节跳动小程序**。
 
-支持开发者导入自定义 echarts 库。
+支持开发者导入**自定义 echarts 库**。
 
 ## 目录
 
@@ -29,13 +29,15 @@
 1、下载依赖
 
 ```bash
-yarn add echarts4taro3 -S
+yarn add echarts4taro3 -S #或 npm install echarts4taro3 -S
 ```
 
 2、项目引用
 
 ```javascript
-import { EChart } from "echarts4taro3";
+import { EChart, loadEcharts } from "echarts4taro3";
+import * as echarts from "echarts4taro3/lib/assets/echarts"; // 框架内置了一份，也可以用官网自定义的 echarts.js
+loadEcharts(echarts); // 初始化加载 echarts 库
 ```
 
 #### 方式二：拷贝引用（注：需要开发者主动兼容 vue 和 vue3）
@@ -63,7 +65,19 @@ import { EChart } from "echarts4taro3";
 
 #### vue3 语法，代码示例如下：
 
+首先在全局 `app.js` 中统一加载 echarts 库，如果只有单个页面使用 echarts，则推荐在单个页面中加载。参考如下：
+
+```javascript
+// app.js
+import * as echarts from "echarts4taro3/lib/assets/echarts"; // 这里用了内置的，也可以用自定义的 echarts.js
+import { loadEcharts } from "echarts4taro3";
+loadEcharts(echarts); // 加载 echarts 库
+```
+
+页面代码如下：
+
 ```html
+<!-- Page A -->
 <template>
   <view class="bar-chart ">
     <EChart ref="canvas" />
@@ -117,6 +131,17 @@ import { EChart } from "echarts4taro3";
 ```
 
 #### vue 语法，代码示例如下：
+
+首先在全局 `app.js` 中统一加载 echarts 库，如果只有单个页面使用 echarts，则推荐在单个页面中加载。参考如下：
+
+```javascript
+// app.js
+import * as echarts from "echarts4taro3/lib/assets/echarts"; // 这里用了内置的，也可以用自定义的 echarts.js
+import { loadEcharts } from "echarts4taro3";
+loadEcharts(echarts); // 加载 echarts 库
+```
+
+页面代码如下：
 
 ```html
 <template>
@@ -184,7 +209,7 @@ import { EChart } from "echarts4taro3";
 
 ```javascript
 import * as echarts from "./assets/echarts"; // 根据需求自定义的 echarts 库
-import { EChart, loadEcharts } from "echarts4taro3";
+import { loadEcharts } from "echarts4taro3";
 loadEcharts(echarts); // 给组件导入自定义的 echarts 库
 ```
 
@@ -304,7 +329,7 @@ onMounted(() => {
 
 对于网页加载速度或者微信小程序包体积大小有要求的，可以做如下调整：
 
-1、因为 echarts 图表库本身体积相对较大，所以开发者可以根据业务需要在 echarts [官网定制](https://echarts.apache.org/zh/builder.html) `echarts.js`，然后通过 `loadEcharts` 方法动态导入，或者替换 lib/assets 目录中 `echarts.js` 文件也可正常使用。
+1、因为 echarts 图表库本身体积相对较大，所以开发者可以根据业务需要在 echarts [官网定制](https://echarts.apache.org/zh/builder.html) `echarts.js`，然后通过 `loadEcharts` 方法动态导入库。
 
 2、在微信小程序中对于应用体积有严格的限制要求，开发者可以通过[分包](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/basic.html)技术对应用进行拆分。
 

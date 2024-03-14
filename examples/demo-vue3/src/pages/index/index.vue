@@ -7,7 +7,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Taro from "@tarojs/taro";
-import * as echarts from "./assets/echarts";
+import * as echarts from "echarts4taro3/lib/assets/echarts"; // 这里用了内置的，也可以用自定义的 echarts.js
 import { EChart, loadEcharts } from "echarts4taro3";
 import "./index.less";
 loadEcharts(echarts);
