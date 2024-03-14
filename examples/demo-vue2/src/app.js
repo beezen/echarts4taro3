@@ -1,6 +1,8 @@
 import Vue from "vue";
 import "./app.less";
-
+import * as echarts from "echarts4taro3/lib/assets/echarts";
+import { loadEcharts } from "echarts4taro3";
+loadEcharts(echarts);
 
 const App = {
   render(h) {
