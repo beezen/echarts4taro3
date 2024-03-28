@@ -1,5 +1,5 @@
 <template>
-  <canvas v-if="isWeb" :id="uid" class="echart-canvas" />
+  <canvas v-if="isWeb" :id="uid" :class="[uid, 'echart-canvas']" />
   <EcCanvas v-else ref="canvas" :uid="uid" class="echart-canvas" />
 </template>
 
@@ -99,7 +99,8 @@ defineExpose({
   getChart,
   setOption,
   resize,
-  refresh
+  refresh,
+  uid: uid.value
 });
 </script>
 

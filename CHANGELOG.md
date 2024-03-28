@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/beezen/echarts4taro3/compare/v1.7.0...v1.8.0) (2024-03-28)
+
+
+### Features
+
+* 新增通过组件实例获取唯一uid属性 ([cceb6ce](https://github.com/beezen/echarts4taro3/commit/cceb6ce7e02f49b678501b208a05f4d4c9eb33ac))
+
 ## [1.7.0](https://github.com/beezen/echarts4taro3/compare/v1.6.0...v1.7.0) (2024-03-14)
 
 

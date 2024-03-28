@@ -44,6 +44,26 @@ onMounted(() => {
         let firstValue = options.series[0].data.shift();
         options.series[0].data.push(firstValue);
         myChart.setOption(options); // myChart 即为 echarts 实例，可使用的实例方法，具体可参考 echarts 官网
+
+        // canvas 转图片地址
+        // const canvasUid = echartComponentInstance.uid;
+        // if (process.env.TARO_ENV === "weapp") {
+        //   Taro.createSelectorQuery()
+        //     .select(`.${canvasUid}`)
+        //     .fields({
+        //       node: true,
+        //       size: true
+        //     })
+        //     .exec((res) => {
+        //       if (res[0]) {
+        //         const canvasNode = res[0].node;
+        //         console.log("图片信息：", canvasNode.toDataURL());
+        //       }
+        //     });
+        // } else if (process.env.TARO_ENV === "h5") {
+        //   const src = document.querySelector(`.${canvasUid} canvas`).toDataURL();
+        //   console.log("图片信息：", src);
+        // }
       }, 2000);
     });
   });
